@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { categories } from "../data";
 
 const Typeahead = ({ suggestions, handleSelect }) => {
   const [value, setValue] = React.useState("");
