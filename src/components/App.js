@@ -4,9 +4,6 @@ import GlobalStyles from "./GlobalStyles";
 import Typeahead from "./Typeahead";
 import { categories } from "../data";
 
-const handleSelect = ({ suggestion, setSuggestion }) => {
-  return;
-};
 const App = (props) => {
   return (
     <>

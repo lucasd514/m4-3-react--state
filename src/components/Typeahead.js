@@ -1,11 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
+const Wrapper = styled.div`
+  margin-left: 33%;
+  margin-top: 15%;
+`;
 const Typeahead = ({ suggestions, handleSelect }) => {
   const [value, setValue] = React.useState("");
 
   return (
-    <>
+    <Wrapper>
       <input
         type="text"
         value={value}
@@ -18,7 +22,7 @@ const Typeahead = ({ suggestions, handleSelect }) => {
       />
 
       <button onClick={() => setValue("")}>Clear</button>
-    </>
+    </Wrapper>
   );
 };
 
