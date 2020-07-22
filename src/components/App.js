@@ -2,14 +2,14 @@ import React from "react";
 
 import GlobalStyles from "./GlobalStyles";
 import Typeahead from "./Typeahead";
-import { categories } from "../data";
+import data from "../data";
 
 const App = (props) => {
   return (
     <>
       <GlobalStyles />
       <Typeahead
-        suggestions={categories.books}
+        suggestions={data.books}
         handleSelect={(suggestion) => {
           window.alert(suggestion);
         }}

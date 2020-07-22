@@ -5,8 +5,15 @@ const Wrapper = styled.div`
   margin-left: 33%;
   margin-top: 15%;
 `;
+
 const Typeahead = ({ suggestions, handleSelect }) => {
   const [value, setValue] = React.useState("");
+
+  const bookLookup = suggestions.filter((book) => {
+    if (value.length >= 2) {
+      return book.title.toUpperCase().includes(value.toUpperCase());
+    }
+  });
 
   return (
     <Wrapper>
@@ -22,6 +29,11 @@ const Typeahead = ({ suggestions, handleSelect }) => {
       />
 
       <button onClick={() => setValue("")}>Clear</button>
+      <ul>
+        {bookLookup.map((books) => {
+          return <li>{books.title}</li>;
+        })}
+      </ul>
     </Wrapper>
   );
 };
