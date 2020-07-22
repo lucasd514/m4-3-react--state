@@ -22,7 +22,7 @@ const Typeahead = ({ suggestions, handleSelect }) => {
 
     &:hover {
       background-color: lightyellow;
-      border: 1px red dashed;
+      border: 1px rgb(240, 188, 66) dashed;
     }
   `;
 
