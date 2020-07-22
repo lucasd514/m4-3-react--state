@@ -15,6 +15,17 @@ const Typeahead = ({ suggestions, handleSelect }) => {
     }
   });
 
+  const Suggestion = styled.li`
+    border: 1px lightgrey solid;
+    text-align: center;
+    padding: 2px;
+
+    &:hover {
+      background-color: lightyellow;
+      border: 1px red dashed;
+    }
+  `;
+
   return (
     <Wrapper>
       <input
@@ -31,7 +42,7 @@ const Typeahead = ({ suggestions, handleSelect }) => {
       <button onClick={() => setValue("")}>Clear</button>
       <ul>
         {bookLookup.map((books) => {
-          return <li>{books.title}</li>;
+          return <Suggestion>{books.title}</Suggestion>;
         })}
       </ul>
     </Wrapper>
