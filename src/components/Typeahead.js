@@ -11,7 +11,9 @@ const Typeahead = ({ suggestions, handleSelect }) => {
 
   const bookLookup = suggestions.filter((book) => {
     if (value.length >= 2) {
-      return book.title.toUpperCase().includes(value.toUpperCase());
+      let foundBooks = book.title.toUpperCase().includes(value.toUpperCase());
+
+      return foundBooks;
     }
   });
 
@@ -25,6 +27,20 @@ const Typeahead = ({ suggestions, handleSelect }) => {
       border: 1px rgb(240, 188, 66) dashed;
     }
   `;
+
+  const displayList = bookLookup.map((books) => {
+    let bookTitle = books.title;
+    let startPosition = bookTitle.toUpperCase().search(value.toUpperCase());
+    let finalPostion = startPosition + value.length;
+    let firstHalf = bookTitle.slice(0, finalPostion);
+    let secondHalf = bookTitle.slice(finalPostion);
+    return (
+      <Suggestion>
+        {firstHalf}
+        <b>{secondHalf}</b>
+      </Suggestion>
+    );
+  });
 
   return (
     <Wrapper>
@@ -40,11 +56,7 @@ const Typeahead = ({ suggestions, handleSelect }) => {
       />
 
       <button onClick={() => setValue("")}>Clear</button>
-      <ul>
-        {bookLookup.map((books) => {
-          return <Suggestion>{books.title}</Suggestion>;
-        })}
-      </ul>
+      <ul>{displayList}</ul>
     </Wrapper>
   );
 };
