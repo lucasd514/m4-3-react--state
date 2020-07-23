@@ -28,8 +28,13 @@ const Typeahead = ({ suggestions, handleSelect }) => {
     }
   `;
 
+  const StyledCategory = styled.span`
+    color: rgb(134, 38, 51);
+  `;
+
   const displayList = bookLookup.map((books) => {
     let bookTitle = books.title;
+    let bookGenre = books.categoryId;
     let startPosition = bookTitle.toUpperCase().search(value.toUpperCase());
     let finalPostion = startPosition + value.length;
     let firstHalf = bookTitle.slice(0, finalPostion);
@@ -37,7 +42,10 @@ const Typeahead = ({ suggestions, handleSelect }) => {
     return (
       <Suggestion>
         {firstHalf}
-        <b>{secondHalf}</b>
+        <b>{secondHalf}</b>{" "}
+        <i>
+          in <StyledCategory>{bookGenre}</StyledCategory>
+        </i>
       </Suggestion>
     );
   });
