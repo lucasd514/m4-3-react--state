@@ -8,6 +8,9 @@ const Wrapper = styled.div`
 
 const Typeahead = ({ suggestions, handleSelect }) => {
   const [value, setValue] = React.useState("");
+  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = React.useState(
+    0
+  );
 
   const bookLookup = suggestions.filter((book) => {
     if (value.length >= 2) {
@@ -17,14 +20,15 @@ const Typeahead = ({ suggestions, handleSelect }) => {
     }
   });
 
+  const isSelected = selectedSuggestionIndex;
+
   const Suggestion = styled.li`
     border: 1px lightgrey solid;
     text-align: center;
     padding: 2px;
-
-    &:hover {
-      background-color: lightyellow;
-      border: 1px rgb(240, 188, 66) dashed;
+    :hover {
+      color: #ed1212;
+      cursor: pointer;
     }
   `;
 
@@ -40,7 +44,11 @@ const Typeahead = ({ suggestions, handleSelect }) => {
     let firstHalf = bookTitle.slice(0, finalPostion);
     let secondHalf = bookTitle.slice(finalPostion);
     return (
-      <Suggestion>
+      <Suggestion
+        onClick={() => handleSelect(books.title)}
+        onhover={() => console.log(suggestions.title)}
+        key={suggestions.id}
+      >
         {firstHalf}
         <b>{secondHalf}</b>{" "}
         <i>
@@ -57,8 +65,23 @@ const Typeahead = ({ suggestions, handleSelect }) => {
         value={value}
         onChange={(ev) => setValue(ev.target.value)}
         onKeyDown={(ev) => {
-          if (ev.key === "Enter") {
-            handleSelect(ev.target.value);
+          switch (ev.key) {
+            case "Enter": {
+              handleSelect(ev.target.value);
+              return;
+            }
+            case "ArrowUp": {
+              console.log("up");
+              setSelectedSuggestionIndex(selectedSuggestionIndex - 1);
+              console.log(selectedSuggestionIndex);
+              return;
+            }
+            case "ArrowDown": {
+              console.log("down");
+              setSelectedSuggestionIndex(selectedSuggestionIndex + 1);
+              console.log(selectedSuggestionIndex);
+              return;
+            }
           }
         }}
       />
